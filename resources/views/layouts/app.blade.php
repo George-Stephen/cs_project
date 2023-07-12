@@ -1,3 +1,9 @@
+@vite('resources/css/app.css')
+@vite('resources/js/app.js')
+@livewireStyles
+@livewireScripts
+
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -33,9 +39,9 @@
             @endif
 
             <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+            <div class="container">
+                @yield('content')
+            </div>
         </div>
 
         @stack('modals')
