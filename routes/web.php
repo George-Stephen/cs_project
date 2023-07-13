@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\StudyGroupController;
+use App\Models\study_group;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,8 +32,9 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::get('/study-groups/create', 'App\Http\Controllers\StudyGroupController@create')->name('study-groups.create');
+// study_group links
 
+Route::get('/study-groups/create', 'App\Http\Controllers\StudyGroupController@create')->name('study-groups.create');
 
 Route::post('/study-groups', 'App\Http\Controllers\StudyGroupController@store')->name('study-groups.store');
 
@@ -45,7 +47,9 @@ Route::get('/study-groups/{id}/edit', 'App\Http\Controllers\StudyGroupController
 
 Route::put('/study-groups/{id}', 'App\Http\Controllers\StudyGroupController@update')->name('study-groups.update');
 
+Route::delete('/study-groups/{id}', 'App\Http\Controllers\StudyGroupController@destroy')->name('study-groups.destroy');
 
+// search links
 
 
 

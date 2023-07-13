@@ -3,12 +3,20 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2 class="mb-2 mt-0 text-4xl font-medium leading-tight text-primary">Study Groups</h2>
+    <h2 class="mb-2 mt-0 text-4xl font-medium leading-tight text-primary"><u>All study groups</u></h2>
 
     <div class="flex flex-col">
         <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
                 <div class="overflow-hidden">
+                    <a href="{{ route('study-groups.create')}}">
+                    <button
+                        type="button"
+                        class="inline-block rounded-full border-2 border-primary px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+                        data-te-ripple-init>
+                        Create new study group
+                    </button>
+                    </a>
                     <table class="min-w-full text-left text-sm font-light">
                         <thead class="border-b font-medium dark:border-neutral-500">
                             <tr>

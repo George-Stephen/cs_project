@@ -88,6 +88,9 @@ class StudyGroupController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $studyGroup = study_group::findOrFail($id);
+        $studyGroup->delete();
+
+        return redirect()->route('study-groups.index')->with('success', 'Study group deleted successfully.');
     }
 }

@@ -18,31 +18,32 @@
         <x-slot name="logo">
             <x-authentication-card-logo />
         </x-slot>
-        <form action="{{ route('study-groups.store') }}" method="POST">
+        <form action="{{ route('study-groups.update', $studyGroup->id)  }}" method="POST">
             @csrf
+            @method('PUT')
             <div class="form-group">
                 <label for="group_name">Group Name:</label>
-                <input type="text" class="block mt-1 w-full" name="group_name" id="group_name" class="form-control" required>
+                <input type="text" class="block mt-1 w-full" name="group_name" id="group_name" class="form-control"  value="{{ $studyGroup->group_name }}">
             </div>
 
             <div class="form-group">
                 <label for="group_course">Group Course:</label>
-                <input type="text" class="block mt-1 w-full" name="group_course" id="group_course" class="form-control" required>
+                <input type="text" class="block mt-1 w-full" name="group_course" id="group_course" class="form-control" required value="{{ $studyGroup->group_course }}">
             </div>
 
             <div class="form-group">
                 <label for="group_link">Group Link:</label>
-                <input type="text" class="block mt-1 w-full" name="group_link" id="group_link" class="form-control" required>
+                <input type="text" class="block mt-1 w-full" name="group_link" id="group_link" class="form-control" required value="{{ $studyGroup->group_link}}">
             </div>
 
             <div class="form-group">
                 <label for="description">Description:</label>
-                <textarea name="description" id="description" class="form-control block mt-1 w-full" required></textarea>
+                <textarea name="description" id="description" class="form-control block mt-1 w-full" required>{{ $studyGroup->description }}</textarea>
             </div>
 
             <div class="form-group">
                 <label for="max_members">Maximum members:</label>
-                <input type="text" class="block mt-1 w-full" name="max_members" id="max_members" class="form-control" required>
+                <input type="text" class="block mt-1 w-full" name="max_members" id="max_members" class="form-control" required value="{{ $studyGroup->max_members }}">
             </div>
 
             <!-- Add any other form fields as needed -->

@@ -12,19 +12,49 @@
                     <table class="min-w-full text-left text-sm font-light">
                         <thead class="border-b font-medium dark:border-neutral-500">
                                 <tr>
-                                <th scope="col" class="px-6 py-4">Group Name</th>
-                                <th scope="col" class="px-6 py-4">Group Course</th>
-                                <th scope="col" class="px-6 py-4">Group Description</th>
-                                <th scope="col" class="px-6 py-4">Join link</th>
-                                <th scope="col" class="px-6 py-4">Maximum number of members</th>
+                                    <th scope="col" class="px-6 py-4">Group Name</th>
+                                    <th scope="col" class="px-6 py-4">Group Course</th>
+                                    <th scope="col" class="px-6 py-4">Group Description</th>
+                                    <th scope="col" class="px-6 py-4">Join link</th>
+                                    <th scope="col" class="px-6 py-4">Maximum number of members</th>
                                 </tr>
                         </thead>
                         <tr >
                             <td class="whitespace-nowrap px-6 py-4">{{ $studyGroup->group_name }}</td>
                             <td class="whitespace-nowrap px-6 py-4">{{ $studyGroup->group_course }}</td>
                             <td class="whitespace-nowrap px-6 py-4">{{ $studyGroup->description}}</td>
-                            <td class="whitespace-nowrap px-6 py-4">{{ $studyGroup->group_link }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">
+                                <a href="{{ $studyGroup->group_link }}">{{ $studyGroup->group_link }}</a>
+                            </td>
                             <td class="whitespace-nowrap px-6 py-4">{{ $studyGroup->max_members }}</td>
+                            
+                        </tr>
+                        <tr>
+                            <td class="whitespace-nowrap px-6 py-4"></td>
+                            <td class="whitespace-nowrap px-6 py-4">
+                                        <a href="{{ route('study-groups.edit', $studyGroup->id) }}">
+                                            <button
+                                            type="button"
+                                            class="inline-block rounded-full border-2 border-info px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-info transition duration-150 ease-in-out hover:border-info-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-info-600 focus:border-info-600 focus:text-info-600 focus:outline-none focus:ring-0 active:border-info-700 active:text-info-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+                                            data-te-ripple-init>
+                                            Edit study group
+                                            </button>
+                                        </a>
+                            </td>
+                            <td class="whitespace-nowrap px-6 py-4"></td>
+                            
+                            <td class="whitespace-nowrap px-6 py-4">
+                                        <form action="{{ route('study-groups.destroy', $studyGroup->id) }}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                            <button
+                                            type="submit"
+                                            class="inline-block rounded-full border-2 border-danger px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-danger transition duration-150 ease-in-out hover:border-danger-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-danger-600 focus:border-danger-600 focus:text-danger-600 focus:outline-none focus:ring-0 active:border-danger-700 active:text-danger-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+                                            data-te-ripple-init>
+                                            Delete Study group
+                                            </button>
+                                        </form>
+                            </td>
                         </tr>
                         <!-- Add additional table rows for more study group details -->
                     </table>
