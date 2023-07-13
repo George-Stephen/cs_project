@@ -52,7 +52,6 @@
                                         @method('DELETE')
                                             <button
                                             type="submit"
-                                            onclick="return confirm('Are you sure you wish to delete this study group?')"
                                             class="inline-block rounded-full border-2 border-danger px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-danger transition duration-150 ease-in-out hover:border-danger-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-danger-600 focus:border-danger-600 focus:text-danger-600 focus:outline-none focus:ring-0 active:border-danger-700 active:text-danger-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
                                             data-te-ripple-init>
                                             Delete Study group
@@ -60,7 +59,13 @@
                                         </form>
                             </td>
                         </tr>
-                        <!-- Add additional table rows for more study group details -->
+                        <script>
+                            function confirm_message(e){
+                                e.preventDefault();
+
+
+                            }
+                        </script>
                     </table>
                 </div>
             </div>
