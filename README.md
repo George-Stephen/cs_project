@@ -14,6 +14,14 @@ Our project is our suggested solution to solving a problem faced by students due
 - **PHP/Laravel**
 - **MYSQL**
 
+## Installing a project
+- Install the latest version of xammp
+- Configure the php.ini file to allow the extension mysql
+- Install composer and npm
+- Open the command line and type "composer global/require laravel"
+- Create a folder on which the project will be hosted and open the terminal in that directory and type "composer new laravel:livewire my_project"
+- After a successful installation, type "run npm dev && run npm build" to build the scaffolding.
+  
 ## Development
 
 ## B.D.D
