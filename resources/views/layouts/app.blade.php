@@ -1,9 +1,3 @@
-@vite('resources/css/app.css')
-@vite('resources/js/app.js')
-@livewireStyles
-@livewireScripts
-
-
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -19,6 +13,8 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <script src="{{ asset('js/app.js') }}" defer></script>
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
         <!-- Styles -->
         @livewireStyles
@@ -39,9 +35,9 @@
             @endif
 
             <!-- Page Content -->
-            <div class="container">
+            <main>
                 @yield('content')
-            </div>
+            </main>
         </div>
 
         @stack('modals')

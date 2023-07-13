@@ -33,5 +33,22 @@ Route::middleware([
 
 Route::get('/study-groups/create', 'App\Http\Controllers\StudyGroupController@create')->name('study-groups.create');
 
+
 Route::post('/study-groups', 'App\Http\Controllers\StudyGroupController@store')->name('study-groups.store');
 
+Route::get('/study-groups', 'App\Http\Controllers\StudyGroupController@index')->name('study-groups.index');
+
+Route::get('/study-groups/{id}', 'App\Http\Controllers\StudyGroupController@show')->name('study-groups.show');
+
+Route::get('/study-groups/{id}/edit', 'App\Http\Controllers\StudyGroupController@edit')->name('study-groups.edit');
+
+
+Route::put('/study-groups/{id}', 'App\Http\Controllers\StudyGroupController@update')->name('study-groups.update');
+
+
+
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

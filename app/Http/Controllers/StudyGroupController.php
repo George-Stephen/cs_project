@@ -12,7 +12,9 @@ class StudyGroupController extends Controller
      */
     public function index()
     {
-        //
+        $studyGroups = study_group::all();
+
+        return view('study-groups.index', compact('studyGroups'));
     }
 
     /**
@@ -38,7 +40,7 @@ class StudyGroupController extends Controller
         ]);
         study_group::create($validatedData);
 
-        return redirect()->route('dashboard')->with('success', 'Study group created successfully.');
+        return redirect()->route('study-groups.index')->with('success', 'Study group created successfully.');
     }
 
     /**
@@ -46,15 +48,19 @@ class StudyGroupController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $studyGroup = study_group::findOrFail($id);
+
+        return view('study-groups.show', compact('studyGroup'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $studyGroup = study_group::findOrFail($id);
+
+        return view('study-groups.edit', compact('studyGroup'));
     }
 
     /**
@@ -62,7 +68,19 @@ class StudyGroupController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validatedData = $request->validate([
+            'group_name' => 'required|max:255',
+            'group_course' => 'required',
+            'group_link' => 'required',
+            'description' => 'required',
+            'max_members' => 'required',
+            // Add any other validation rules for your form fields
+        ]);
+
+        $studyGroup = study_group::findOrFail($id);
+        $studyGroup->update($validatedData);
+
+        return redirect()->route('study-groups.index')->with('success', 'Study group updated successfully.');
     }
 
     /**
