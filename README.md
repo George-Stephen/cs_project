@@ -24,9 +24,9 @@ Our project is our suggested solution to solving a problem faced by students due
 - Install Git Bash and after successful installation open Bash in the directory of the project.
 - In Bash, type `git clone https://github.com/George-Stephen/omniverse_info_system.git` to import the project from the online repository to your local machine
   
-## Development
-
 ## B.D.D
+
+Whenever a user registers in the system then they would get a verification link to verify their email. This is a necessity to be allowed to perform secondary functions. 
 
 ## License
 
