@@ -1,4 +1,4 @@
-## An Approach to Enhance Communication and Information Seeking Among Students Through an Integrated Communication and Information System
+## Omniverse Info System
 
 This is a website that combines question-answering, blogging and group-finding all in one platform. 
 Our project is our suggested solution to solving a problem faced by students due to a lack of an integrated web-based information and communication system using a Laravel framework of PHP.
