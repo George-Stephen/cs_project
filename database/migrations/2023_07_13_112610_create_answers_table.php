@@ -15,9 +15,14 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('question_id');
             $table->text('body');
+            $table -> integer('upvotes')->default(0);
+            $table -> integer('downvotes')->default(0);
             $table->timestamps();
+            $table->unsignedBigInteger('answered_by');
+
 
             $table->foreign('question_id')->references('id')->on('tbl_questions')->onDelete('cascade');
+            $table->foreign('answered_by')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

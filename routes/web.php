@@ -51,6 +51,10 @@ Route::delete('/study-groups/{id}', 'App\Http\Controllers\StudyGroupController@d
 
 // search links
 
+Route::resource('questions', 'QuestionController');
+Route::resource('questions.answers', 'AnswerController')->shallow();
+
+
 
 
 Auth::routes();

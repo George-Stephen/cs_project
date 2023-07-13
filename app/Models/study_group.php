@@ -19,8 +19,8 @@ class study_group extends Model
         'max_members',
     ];
 
-    // public function relatedModel()
-    // {
-    //     return $this->hasMany(study_group :: class);
-    // }
+    public function study_group()
+    {
+        return $this->hasMany(study_group :: class);
+    }
 }

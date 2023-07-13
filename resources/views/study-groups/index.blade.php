@@ -5,10 +5,10 @@
 @section('content')
     <h2 class="mb-2 mt-0 text-4xl font-medium leading-tight text-primary"><u>All study groups</u></h2>
 
-    <div class="flex flex-col">
-        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="flex flex-col overflow-x-auto">
+        <div class="sm:-mx-6 lg:-mx-8">
             <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-                <div class="overflow-hidden">
+                <div class="overflow-x-auto">
                     <a href="{{ route('study-groups.create')}}">
                     <button
                         type="button"
@@ -34,7 +34,7 @@
                                     <td class="whitespace-nowrap px-6 py-4 font-medium">{{ $studyGroup->id }}</td>
                                     <td class="whitespace-nowrap px-6 py-4">{{ $studyGroup->group_name }}</td>
                                     <td class="whitespace-nowrap px-6 py-4">{{ $studyGroup->group_course }}</td>
-                                    <td class="whitespace-nowrap px-6 py-4">{{ $studyGroup->description}}</td>
+                                    <td class="whitespace-nowrap px-6 py-4" style="word-wrap: break-word;">{{ $studyGroup->description}}</td>
                                     <td class="whitespace-nowrap px-6 py-4">
                                         <a href="{{ route('study-groups.show', $studyGroup->id) }}">
                                             <button

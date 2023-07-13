@@ -6,3 +6,5 @@
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+td.break-it { @include word-wrap; }
