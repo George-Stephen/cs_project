@@ -27,7 +27,7 @@
                                 <tr>
                                     <th scope="col" class="px-6 py-4">Join link</th>
                                     <td class="whitespace-nowrap px-6 py-4">
-                                        <a href="{{ $studyGroup->group_link }}">{{ $studyGroup->group_link }}</a>
+                                        <a href="{{ $studyGroup->group_link }}" target="_blank">{{ $studyGroup->group_link }}</a>
                                     </td>
                                 </tr>
                                 <tr>
