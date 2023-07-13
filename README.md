@@ -3,17 +3,6 @@
 This is a website that combines question-answering, blogging and group-finding all in one platform. 
 Our project is our suggested solution to solving a problem faced by students due to a lack of an integrated web-based information and communication system using a Laravel framework of PHP.
 
-## Who developed this project
-- **George Stephen Wangui**
-- **Raymond Munyi**
-
-## Tools and techniques
-- **Hypertext Mark-up Language**
-- **Cascading Style Sheets and Bootstrap**
-- **Javascript and JQuery**
-- **PHP/Laravel**
-- **MYSQL**
-
 ## Installing a project
 - Install the latest version of XAMPP
 - Configure the php.ini file to allow the extension mysql
