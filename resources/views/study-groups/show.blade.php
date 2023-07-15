@@ -16,10 +16,6 @@
                                     <td class="whitespace-nowrap px-6 py-4">{{ $studyGroup->group_name }}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="col" class="px-6 py-4">Group Course</th>
-                                    <td class="whitespace-nowrap px-6 py-4">{{ $studyGroup->group_course }}</td>
-                                </tr>
-                                <tr>
                                     <th scope="col" class="px-6 py-4">Group Description</th>
                                     <td class="whitespace-nowrap px-6 py-4" style="word-wrap: break-word;">{{ $studyGroup->description}}</td>
 
@@ -31,8 +27,20 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <th scope="col" class="px-6 py-4">Category of the Study group </th>
+                                    <td class="whitespace-nowrap px-6 py-4">{{ $studyGroup->category->name  }}</td>
+                                </tr>
+                                <tr>
                                     <th scope="col" class="px-6 py-4">Maximum number of members</th>
                                     <td class="whitespace-nowrap px-6 py-4">{{ $studyGroup->max_members }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="col" class="px-6 py-4">Start date </th>
+                                    <td class="whitespace-nowrap px-6 py-4">{{ $studyGroup->start_date }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="col" class="px-6 py-4">End date</th>
+                                    <td class="whitespace-nowrap px-6 py-4">{{ $studyGroup->end_date }}</td>
                                 </tr>
                         </thead>
                         <tr>
@@ -47,7 +55,7 @@
                                         </a>
                             </td>
                             <td class="whitespace-nowrap px-6 py-4">
-                                        <form action="{{ route('study-groups.destroy', $studyGroup->id) }}" method="post">
+                                        <form action="{{ route('study-groups.destroy', $studyGroup->id) }}" method="post" id="delete-form">
                                         @csrf
                                         @method('DELETE')
                                             <button
@@ -60,11 +68,23 @@
                             </td>
                         </tr>
                         <script>
-                            function confirm_message(e){
+                            document.getElementById('delete-form').addEventListener('submit', function(e){
                                 e.preventDefault();
-
-
-                            }
+                                Swal.fire({
+                                    title: 'Are you sure?',
+                                    text: 'This action cannot be undone.',
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#d33',
+                                    cancelButtonColor: '#3085d6',
+                                    confirmButtonText: 'Yes, delete it!'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        // If confirmed, submit the form
+                                        this.submit();
+                                    }
+                                });
+                            });
                         </script>
                     </table>
                 </div>

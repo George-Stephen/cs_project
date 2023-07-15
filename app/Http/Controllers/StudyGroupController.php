@@ -2,19 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\study_group;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class StudyGroupController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $studyGroups = study_group::all();
+        $search = $request->input('search');
+        $perPage = 10;
 
-        return view('study-groups.index', compact('studyGroups'));
+        $query = study_group::with('category');
+
+        if ($search) {
+            $query->where('group_name', 'LIKE', "%{$search}%")
+                ->orWhere('group_course', 'LIKE', "%{$search}%")
+                ->orWhere('description', 'LIKE', "%{$search}%");
+        }
+        $studyGroups = $query->paginate($perPage);
+
+        return view('study-groups.index', compact('studyGroups','search'));
     }
 
     /**
@@ -22,8 +34,9 @@ class StudyGroupController extends Controller
      */
     public function create()
     {
-        //
-        return view('study-groups.create');
+        $categories = Category::all();
+
+        return view('study-groups.create', compact('categories'));
     }
 
     /**
@@ -31,12 +44,18 @@ class StudyGroupController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request -> validate([
+
+        
+
+        $validatedData = $request ->validate([
             'group_name' => 'required|max:255',
             'group_course' => 'required',
+            'category_id' => 'required',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after:start_date',
             'group_link' => 'required',
             'description' => 'required',
-            'max_members' => 'required',
+            'max_members' => 'required|integer|min:1|max:30',
         ]);
         study_group::create($validatedData);
 

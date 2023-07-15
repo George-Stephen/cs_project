@@ -15,12 +15,17 @@ class study_group extends Model
         'group_name',
         'group_course',
         'group_link',
+        'category_id',
+        'start_date',
+        'end_date',
         'description',
         'max_members',
     ];
 
-    public function study_group()
+    public function category()
     {
-        return $this->hasMany(study_group :: class);
+        return $this->belongsTo(Category::class);
     }
+
+    
 }

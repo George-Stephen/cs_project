@@ -34,20 +34,25 @@ Route::middleware([
 
 // study_group links
 
-Route::get('/study-groups/create', 'App\Http\Controllers\StudyGroupController@create')->name('study-groups.create');
+Route::group(['middleware' => 'web'], function () {
+    Route::get('/study-groups/create', 'App\Http\Controllers\StudyGroupController@create')->name('study-groups.create');
 
-Route::post('/study-groups', 'App\Http\Controllers\StudyGroupController@store')->name('study-groups.store');
+    Route::post('/study-groups', 'App\Http\Controllers\StudyGroupController@store')->name('study-groups.store');
 
-Route::get('/study-groups', 'App\Http\Controllers\StudyGroupController@index')->name('study-groups.index');
+    Route::get('/study-groups', 'App\Http\Controllers\StudyGroupController@index')->name('study-groups.index');
 
-Route::get('/study-groups/{id}', 'App\Http\Controllers\StudyGroupController@show')->name('study-groups.show');
+    Route::get('/study-groups/{id}', 'App\Http\Controllers\StudyGroupController@show')->name('study-groups.show');
 
-Route::get('/study-groups/{id}/edit', 'App\Http\Controllers\StudyGroupController@edit')->name('study-groups.edit');
+    Route::get('/study-groups/{id}/edit', 'App\Http\Controllers\StudyGroupController@edit')->name('study-groups.edit');
 
 
-Route::put('/study-groups/{id}', 'App\Http\Controllers\StudyGroupController@update')->name('study-groups.update');
+    Route::put('/study-groups/{id}', 'App\Http\Controllers\StudyGroupController@update')->name('study-groups.update');
 
-Route::delete('/study-groups/{id}', 'App\Http\Controllers\StudyGroupController@destroy')->name('study-groups.destroy');
+    Route::delete('/study-groups/{id}', 'App\Http\Controllers\StudyGroupController@destroy')->name('study-groups.destroy');
+        // Add more routes as needed
+});
+
+
 
 // search links
 
