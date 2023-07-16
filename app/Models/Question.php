@@ -34,4 +34,9 @@ class Question extends Model
     return $this->belongsToMany(Tag::class, 'tbl_question_tag');
 }
 
+public function isAskedBy(User $user)
+    {
+        return $this->asked_by === $user->id;
+    }
+
 }

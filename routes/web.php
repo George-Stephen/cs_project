@@ -83,6 +83,19 @@ Route::post('/questions', 'App\Http\Controllers\QuestionController@store')->name
 
 Route::post('/questions/{question}/answers', 'App\Http\Controllers\AnswerController@store')->name('answers.store');
 
+Route::get('/questions/{question}/edit', 'App\Http\Controllers\QuestionController@edit')->name('questions.edit');
+
+Route::get('/answers/{answer}/edit', 'App\Http\Controllers\AnswerController@edit')->name('answers.edit');
+
+Route::put('/questions/{question}', 'App\Http\Controllers\QuestionController@update')->name('questions.update');
+
+Route::put('/answers/{answer}', 'App\Http\Controllers\AnswerController@update')->name('answers.update');
+
+
+Route::delete('/questions/{question}', 'App\Http\Controllers\QuestionController@destroy')->name('questions.destroy');
+
+Route::delete('/answers/{answer}', 'App\Http\Controllers\AnswerController@destroy')->name('answers.destroy');
+
 
 
 Route::post('/questions/{question}/upvote', 'App\Http\Controllers\QuestionController@upvote')->name('questions.upvote');

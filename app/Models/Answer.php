@@ -28,4 +28,9 @@ class Answer extends Model
     return $this->belongsTo(User::class, 'answered_by');
     }
 
+    public function isAnsweredBy(User $user)
+    {
+        return $this->answered_by === $user->id;
+    }
+
 }

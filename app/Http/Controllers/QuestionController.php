@@ -80,7 +80,7 @@ class QuestionController extends Controller
     {
         $question = Question::findOrFail($id);
 
-        return view('question-module.edit', compact('question'));
+        return view('question_module.edit', compact('question'));
     }
 
     /**
@@ -88,27 +88,28 @@ class QuestionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $validatedData = $request-> validate([
+        $question = Question::findOrFail($id);
+        
+        $request-> validate([
             'title' => 'required|max:255',
             'body' => 'required',
-            'upvotes' => 'required',
-            'downvotes' => 'required',
-            'asked_by' => Auth::user()->id,
         ]);
-        $question =  Question::findOrfail($id)->update($validatedData);
+        $question->title = $request->input('title');
+        $question->body = $request->input('body');
+        $question->save();
         return redirect() -> route('questions.index') ->with('success', 'Your Question has been updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Question $question)
     {
-        $question= Question::findOrFail($id);
         $question->delete();
 
-        return redirect()->route('question-module.index')->with('success', 'Your Question has been deleted successfully.');
+        return redirect()->route('questions.index')->with('success', 'Your Question has been deleted successfully.');
     }
+
     public function upvote(Request $request, $id)
     {
         $question= Question::findOrFail($id);

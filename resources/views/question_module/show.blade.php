@@ -10,6 +10,33 @@
                     @foreach ($question->tags as $tag)
                         <span class="inline-block whitespace-nowrap rounded-[0.27rem] bg-primary-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-primary-700">{{ $tag->name }}</span>
                     @endforeach
+                    @if ($question->isAskedBy(Auth::user()))
+                    <div class="flex">
+                        <div class="w-1/3"></div>
+                        <div class="w-1/2">
+                            <a href="{{ route('questions.edit', $question) }}">
+                                <button
+                                    type="button"
+                                    class="inline-block rounded-full border-2 border-info px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-info transition duration-150 ease-in-out hover:border-info-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-info-600 focus:border-info-600 focus:text-info-600 focus:outline-none focus:ring-0 active:border-info-700 active:text-info-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+                                    data-te-ripple-init>
+                                    Edit your question
+                                </button>
+                            </a>
+                        </div>
+                        <div class="w-1/2">
+                            <form action="{{ route('questions.destroy', $question) }}" method="post" id="delete-form">
+                                @csrf
+                                @method('DELETE')
+                                <button
+                                    type="submit"
+                                    class="inline-block rounded-full border-2 border-danger px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-danger transition duration-150 ease-in-out hover:border-danger-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-danger-600 focus:border-danger-600 focus:text-danger-600 focus:outline-none focus:ring-0 active:border-danger-700 active:text-danger-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+                                    data-te-ripple-init>
+                                    Delete your question
+                                    </button>
+                            </form>
+                        </div>
+                    </div>
+                    @else
                     <div class="flex">
                         <div class="w-1/3">
                             <p class="text-center text-lg font-bold">Upvotes</p>
@@ -40,7 +67,9 @@
                             <p class="text-center text-3x1 font-bold">Asked by</p>
                             <p class="text-center text-lg font-bold">{{ $question->user->full_name }}</p>
                         </div>
-            </div>   
+                    </div> 
+                    @endif
+                     
         </div>
     </div>
     <!-- <end of question> -->
@@ -59,7 +88,34 @@
     @foreach ($question->answers as $answer)
     <div class="block rounded-lg bg-gray p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-300">
         <div class="card-body">
-                <p class="mb-4 text-base text-neutral-600 dark:text-neutral-900">{{ $answer->body }}</p>
+            <p class="mb-4 text-base text-neutral-600 dark:text-neutral-900">{{ $answer->body }}</p>
+            @if ($answer->isAnsweredBy(Auth::user()))
+                    <div class="flex">
+                        <div class="w-1/3"></div>
+                        <div class="w-1/2">
+                            <a href="{{ route('answers.edit', $answer) }}">
+                                <button
+                                    type="button"
+                                    class="inline-block rounded-full border-2 border-info px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-info transition duration-150 ease-in-out hover:border-info-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-info-600 focus:border-info-600 focus:text-info-600 focus:outline-none focus:ring-0 active:border-info-700 active:text-info-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+                                    data-te-ripple-init>
+                                    Edit your answer
+                                </button>
+                            </a>
+                        </div>
+                        <div class="w-1/2">
+                            <form action="{{ route('answers.destroy', $answer) }}" method="post" id="delete-form">
+                                @csrf
+                                @method('DELETE')
+                                <button
+                                    type="submit"
+                                    class="inline-block rounded-full border-2 border-danger px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-danger transition duration-150 ease-in-out hover:border-danger-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-danger-600 focus:border-danger-600 focus:text-danger-600 focus:outline-none focus:ring-0 active:border-danger-700 active:text-danger-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+                                    data-te-ripple-init>
+                                    Delete your question
+                                    </button>
+                            </form>
+                        </div>
+                    </div>
+                    @else
                     <div class="flex">
                         <div class="w-1/3">
                             <p class="text-center text-lg font-bold">Upvotes</p>
@@ -90,7 +146,9 @@
                             <p class="text-center text-3x1 font-bold">Responded by</p>
                             <p class="text-center text-lg font-bold">{{ $answer->user->full_name }}</p>
                         </div>
-            </div>   
+                    </div>  
+                    @endif
+                 
         </div>
     </div>
     <br>

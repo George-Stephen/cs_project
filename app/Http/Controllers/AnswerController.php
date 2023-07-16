@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Answer;
+use App\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -41,11 +42,12 @@ class AnswerController extends Controller
         $answer = new Answer();
         $answer->body = $validatedData['body'];
         $answer->question_id = $validatedData['question_id'];
+        $question = Question::find($validatedData['question_id']);
         $answer->answered_by = Auth::id();
 
         $answer->save();
 
-        return redirect()->route('questions.index')->with('success', 'Question created successfully.');
+        return redirect()->route('questions.show', $question)->with('success', 'Answer added successfully.');
     }
 
     /**
@@ -65,7 +67,7 @@ class AnswerController extends Controller
     {
         $answer = Answer::findOrFail($id);
 
-        return view('answer-module.edit', compact('answer'));
+        return view('answer_module.edit', compact('answer'));
     }
 
     /**
@@ -73,30 +75,29 @@ class AnswerController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $validatedData = $request -> validate(
+        $request -> validate(
             [
                 'body' => 'required',
-                'question_id' => 'required',
-                'upvotes' => 'required',
-                'downvotes' => 'required',
-                'answered_by' => Auth::user()->id,
             ]
         );
 
-        Answer::findOrFail($id) -> update($validatedData);
-        return redirect() -> route('question-module.index')-> with('Success','Your answer has been successfully updated' );
+        $answer = Answer::findOrFail($id);
+        $answer->body = $request->input('body');
+        $answer->save();
+        
+        return redirect() -> route('questions.index')-> with('Success','Your answer has been successfully updated' );
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Answer $answer)
     {
-        $answer = Answer::findOrFail($id);
         $answer->delete();
 
-        return redirect()->route('answer-module.index')->with('success', 'Your Answer has been deleted successfully.');
+        return redirect()->route('questions.index')->with('success', 'Your Answer has been deleted successfully.');
     }
+
     public function upvote(Answer $answer)
     {
         $answer->increment('upvotes');
