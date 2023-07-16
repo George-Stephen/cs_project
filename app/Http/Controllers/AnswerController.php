@@ -92,4 +92,17 @@ class AnswerController extends Controller
 
         return redirect()->route('answer-module.index')->with('success', 'Your Answer has been deleted successfully.');
     }
+    public function upvote(Answer $answer)
+    {
+        $answer->increment('upvotes');
+
+        return redirect()->back();
+    }
+
+    public function downvote(Answer $answer)
+    {
+        $answer->increment('downvotes');
+
+        return redirect()->back();
+    }
 }

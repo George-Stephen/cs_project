@@ -20,22 +20,13 @@
         </x-slot>
         <form action="{{ route('study-groups.store') }}" method="POST">
             @csrf
+
+            <input type="hidden" name="creator_id" value="{{ Auth::id() }}"> <!-- Hidden field for creator ID -->
+            
             <div class="form-group">
                 <label for="group_name">Group Name:</label>
                 <input type="text" class="block mt-1 w-full" name="group_name" id="group_name" class="form-control">
             </div>
-
-            <div class="form-group">
-                <label for="group_course">Group Course:</label>
-                <input type="text" class="block mt-1 w-full" name="group_course" id="group_course" class="form-control" required>
-            </div>
-
-            <div class="form-group">
-                <label for="group_link">Group Link:</label>
-                <input type="text" class="block mt-1 w-full" name="group_link" id="group_link" class="form-control" required >
-            </div>
-
-            
 
             <div class="form-group">
                 <label for="category">Group category:</label>
@@ -46,6 +37,12 @@
                     @endforeach
                 </select>
             </div>
+
+            <div class="form-group">
+                <label for="group_link">Group Link:</label>
+                <input type="text" class="block mt-1 w-full" name="group_link" id="group_link" class="form-control" required >
+            </div>
+
 
             <div class="form-group">
                 <label for="max_members">Maximum members:</label>

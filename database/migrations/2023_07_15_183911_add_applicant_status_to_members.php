@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tbl_study_group', function (Blueprint $table) {
-            $table->id();
-            $table -> string('group_name');
-            $table -> string('group_link');
-            $table -> string('description');
-            $table -> integer('number_memebers');
-            $table->timestamps();
+        Schema::table('tbl_members', function (Blueprint $table) {
+            $table->string('applicant_status')->default('pending');
         });
     }
 
@@ -26,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tbl_study_group');
+        Schema::table('tbl_members', function (Blueprint $table) {
+            //
+        });
     }
 };

@@ -19,9 +19,19 @@ class Question extends Model
         'asked_by',
     ];
 
-    public function question()
+    public function answers()
     {
-    return $this->belongsTo(Question::class);
+    return $this->hasMany(Answer::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'asked_by');
+    }
+
+    public function tags()
+{
+    return $this->belongsToMany(Tag::class, 'tbl_question_tag');
+}
 
 }

@@ -18,9 +18,14 @@ class Answer extends Model
         'answered_by',
     ];
 
-    public function answers()
+    public function question()
     {
-    return $this->hasMany(Answer::class);
+    return $this->belongsTo(Question::class);
+    }
+
+    public function user()
+    {
+    return $this->belongsTo(User::class, 'answered_by');
     }
 
 }

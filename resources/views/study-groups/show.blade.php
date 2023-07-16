@@ -21,12 +21,6 @@
 
                                 </tr>
                                 <tr>
-                                    <th scope="col" class="px-6 py-4">Join link</th>
-                                    <td class="whitespace-nowrap px-6 py-4">
-                                        <a href="{{ $studyGroup->group_link }}" target="_blank">{{ $studyGroup->group_link }}</a>
-                                    </td>
-                                </tr>
-                                <tr>
                                     <th scope="col" class="px-6 py-4">Category of the Study group </th>
                                     <td class="whitespace-nowrap px-6 py-4">{{ $studyGroup->category->name  }}</td>
                                 </tr>
@@ -43,6 +37,8 @@
                                     <td class="whitespace-nowrap px-6 py-4">{{ $studyGroup->end_date }}</td>
                                 </tr>
                         </thead>
+
+                        @if ($studyGroup->isCreatedBy(Auth::user()))
                         <tr>
                             <td class="whitespace-nowrap px-6 py-4">
                                         <a href="{{ route('study-groups.edit', $studyGroup->id) }}">
@@ -51,6 +47,16 @@
                                             class="inline-block rounded-full border-2 border-info px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-info transition duration-150 ease-in-out hover:border-info-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-info-600 focus:border-info-600 focus:text-info-600 focus:outline-none focus:ring-0 active:border-info-700 active:text-info-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
                                             data-te-ripple-init>
                                             Edit study group
+                                            </button>
+                                        </a>
+                            </td>
+                            <td class="whitespace-nowrap px-6 py-4">
+                                        <a href="{{ route('study-groups.members', $studyGroup) }}">
+                                            <button
+                                            type="button"
+                                            class="inline-block rounded-full border-2 border-primary px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+                                            data-te-ripple-init>
+                                            View group members
                                             </button>
                                         </a>
                             </td>
@@ -67,6 +73,48 @@
                                         </form>
                             </td>
                         </tr>
+                        @else
+
+
+                        @if ($isMember && $isApproved)
+                            <tr>
+                                <td class="whitespace-nowrap px-6 py-4" colspan="2">
+                                    <div class="alert alert-success">
+                                    Congratulations! You are a member and your application has been approved.
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                        @elseif ($isMember && $isPending)
+                            <tr>
+                                <td class="whitespace-nowrap px-6 py-4" colspan="2">
+                                    <div class="alert alert-info">
+                                        Thank you for your application. Please wait until your application is approved.
+                                    </div>
+                                </td>
+                            </tr>
+                        @elseif (!$isMember && $isApproved && $isPending)
+                            <tr>
+                                <td class="whitespace-nowrap px-6 py-4" colspan="2">
+                                    <form action="{{ route('study-groups.join', $studyGroup) }}"  method="POST">
+                                    @csrf
+                                            <button
+                                                type="submit"
+                                                class="inline-block rounded-full border-2 border-info px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-info transition duration-150 ease-in-out hover:border-info-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-info-600 focus:border-info-600 focus:text-info-600 focus:outline-none focus:ring-0 active:border-info-700 active:text-info-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+                                                data-te-ripple-init>
+                                                Apply to join
+                                            </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endif
+
+                        <tr>
+                            
+                        </tr>
+                        @endif
+                        
+
                         <script>
                             document.getElementById('delete-form').addEventListener('submit', function(e){
                                 e.preventDefault();

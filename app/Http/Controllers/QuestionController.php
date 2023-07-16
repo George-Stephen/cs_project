@@ -13,8 +13,8 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $questions = Question:: latest() -> paginate(10);
-        return view('question-module.index', compact('questions'));
+        $questions = Question:: withCount('answers')-> latest() -> paginate(10);
+        return view('question_module.index', compact('questions'));
     }
 
     /**
@@ -33,10 +33,16 @@ class QuestionController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|max:255',
             'body' => 'required',
+            'tags' => 'required|array',
+            'tags.*' => 'exists:tbl_tags,id',
             'asked_by' => Auth::id(),
         ]);
 
-        Question:: create($validatedData);
+        $tagIds = $request->input('tags');
+
+        $question = Question:: create($validatedData);
+
+        $question->tags()->attach($tagIds);
 
         return redirect()->route('question-module.index')->with('success', 'Question created successfully.');
     }
@@ -46,8 +52,9 @@ class QuestionController extends Controller
      */
     public function show(string $id)
     {
-        $question = Question:: findOrFail($id);
-        return view('question-module.show', compact('question')); 
+        $question = Question::with('answers')->find($id);
+        $numAnswers = $question->answers->count();
+        return view('question_module.show', compact('question','numAnswers')); 
     }
 
     /**
@@ -86,4 +93,19 @@ class QuestionController extends Controller
 
         return redirect()->route('question-module.index')->with('success', 'Your Question has been deleted successfully.');
     }
+    public function upvote(Request $request, $id)
+    {
+        $question= Question::findOrFail($id);
+        $question->increment('upvotes');
+        return redirect()->back();
+    }
+
+    public function downvote(Request $request, $id)
+    {
+        // Logic to add a downvote for the question or answer
+        $question= Question::findOrFail($id);
+        $question->increment('downvotes');
+        return redirect()->back();
+    }
+    
 }

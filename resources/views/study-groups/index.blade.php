@@ -29,7 +29,7 @@
                         </div>
                     </div>
                     @if ($studyGroups->isEmpty())
-                        <p style="text-align: center;">No study groups found.</p>
+                        <h4 style="text-align: center;" class="mb-2 mt-0 text-4xl font-medium leading-tight text-primary">No study groups found.</h4>
                     @else
                         <table class="min-w-full text-left text-sm font-light">
                             <thead class="border-b font-medium dark:border-neutral-500">
