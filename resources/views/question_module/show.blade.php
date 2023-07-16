@@ -93,6 +93,24 @@
             </div>   
         </div>
     </div>
+    <br>
     @endforeach
+    <br>
+    <div class="block rounded-lg bg-gray p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-300">
+        <div class="card-body">
+            <h2 class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-800">Your Answer:</h2> 
+            <form action="{{ route('answers.store', $question) }}" method="POST">
+                @csrf
+
+                <div class="form-group">
+                    <textarea name="body" id="body" class="form-control w-full px-4 py-2 border border-gray-300 rounded-lg" rows="5" required></textarea>
+                </div>
+                
+                <input type="hidden" name="question_id" value="{{ $question->id }}">
+
+                <button type="submit" class="w-100 h-30 inline-block rounded-full border-2 border-success px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-success transition duration-150 ease-in-out hover:border-success-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-success-600 focus:border-success-600 focus:text-success-600 focus:outline-none focus:ring-0 active:border-success-700 active:text-success-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+            data-te-ripple-init>Submit Answer</button>
+            </form>  
+    </div>
 </div>
 @endsection

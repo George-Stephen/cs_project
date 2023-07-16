@@ -15,16 +15,16 @@ class AnswerController extends Controller
     {
         $answers = Answer::latest()->paginate(10);
 
-        return view('answer-module.index', compact('answers'));
+        return view('answer_module.index', compact('answers'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        return view('question-module.create');
-    }
+    // public function create()
+    // {
+    //     return view('questio-module.create');
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -34,13 +34,18 @@ class AnswerController extends Controller
         $validatedData = $request ->validate(
             [
                 'body' => 'required',
-                'question_id' => 'required',
-                'answered_by' => Auth::id(),
+                'question_id' => 'required|exists:tbl_questions,id',
             ]
         );
 
-        Answer::create($validatedData);
-        return redirect() -> route('question_module.index') -> with('Success','Your answer has been successfully added' );
+        $answer = new Answer();
+        $answer->body = $validatedData['body'];
+        $answer->question_id = $validatedData['question_id'];
+        $answer->answered_by = Auth::id();
+
+        $answer->save();
+
+        return redirect()->route('questions.index')->with('success', 'Question created successfully.');
     }
 
     /**

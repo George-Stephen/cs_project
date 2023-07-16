@@ -3,18 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\Question;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class QuestionController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $questions = Question:: withCount('answers')-> latest() -> paginate(10);
-        return view('question_module.index', compact('questions'));
+        $search = $request->input('search');
+        $questions = Question:: withCount('answers');
+        if ($search) {
+            $questions->where('title', 'LIKE', "%{$search}%")
+                ->orWhere('body', 'LIKE', "%{$search}%");
+        }
+        $questions = $questions->paginate(10);
+        return view('question_module.index', compact('questions', 'search'));
     }
 
     /**
@@ -22,7 +30,8 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        return view('question-module.create');
+        $tags = Tag::all();
+        return view('question_module.create',compact('tags'));
     }
 
     /**
@@ -30,21 +39,28 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'title' => 'required|max:255',
+         $request->validate([
+            'title' => ['required',
+                Rule::unique('tbl_questions')->where(function ($query) use ($request) {
+                    return $query->where('title', $request->title);
+                }),
+            ],
             'body' => 'required',
             'tags' => 'required|array',
             'tags.*' => 'exists:tbl_tags,id',
+            
+        ]);
+        $question =  Question::create([
+            'title' => $request->input('title'),
+            'body' => $request->input('body'),
             'asked_by' => Auth::id(),
         ]);
 
         $tagIds = $request->input('tags');
 
-        $question = Question:: create($validatedData);
-
         $question->tags()->attach($tagIds);
 
-        return redirect()->route('question-module.index')->with('success', 'Question created successfully.');
+        return redirect()->route('questions.index')->with('success', 'Question created successfully.');
     }
 
     /**
@@ -80,7 +96,7 @@ class QuestionController extends Controller
             'asked_by' => Auth::user()->id,
         ]);
         $question =  Question::findOrfail($id)->update($validatedData);
-        return redirect() -> route('question-module.index') ->with('success', 'Your Question has been updated successfully.');
+        return redirect() -> route('questions.index') ->with('success', 'Your Question has been updated successfully.');
     }
 
     /**

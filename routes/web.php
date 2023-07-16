@@ -74,7 +74,16 @@ Route::get('/search', 'SearchController@index')->name('search.index');
 
 
 Route::resource('questions', 'App\Http\Controllers\QuestionController');
-Route::resource('questions.answers', 'AnswerController')->shallow();
+Route::resource('questions.answers', 'App\Http\Controllers\AnswerController')->shallow();
+
+Route::get('/questions', 'App\Http\Controllers\QuestionController@index')->name('questions.index');
+
+Route::get('/questions/create', 'App\Http\Controllers\QuestionController@create')->name('questions.create');
+Route::post('/questions', 'App\Http\Controllers\QuestionController@store')->name('questions.store');
+
+Route::post('/questions/{question}/answers', 'App\Http\Controllers\AnswerController@store')->name('answers.store');
+
+
 
 Route::post('/questions/{question}/upvote', 'App\Http\Controllers\QuestionController@upvote')->name('questions.upvote');
 Route::post('/questions/{question}/downvote', 'App\Http\Controllers\QuestionController@downvote')->name('questions.downvote');
