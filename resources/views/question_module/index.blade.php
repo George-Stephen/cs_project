@@ -22,7 +22,12 @@
                 </div>
             </div>
         </div>
-        @foreach ($questions as $question)
+        
+
+            @if($questions->isEmpty())
+            <h4 style="text-align: center;" class="mb-2 mt-0 text-4xl font-medium leading-tight text-primary">No results found for your question.</h4>
+            @else
+            @foreach ($questions as $question)
             <div>
                 <br>
                 <br>
@@ -68,6 +73,8 @@
                     </div>
                 </div>
             </div>
-        @endforeach
+            @endforeach
+            @endif
+            
     </div>
 @endsection

@@ -3,8 +3,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2 class="mb-2 mt-0 text-4xl font-medium leading-tight text-primary"><u>All study groups</u></h2>
-
     <div class="flex flex-col overflow-x-auto">
         <div class="sm:-mx-6 lg:-mx-8">
             <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">

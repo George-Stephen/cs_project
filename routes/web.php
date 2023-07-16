@@ -72,41 +72,46 @@ Route::group(['middleware' => 'web'], function () {
 // search links
 Route::get('/search', 'SearchController@index')->name('search.index');
 
-
-Route::resource('questions', 'App\Http\Controllers\QuestionController');
 Route::resource('questions.answers', 'App\Http\Controllers\AnswerController')->shallow();
+
+// questions routes
+Route::resource('questions', 'App\Http\Controllers\QuestionController');
 
 Route::get('/questions', 'App\Http\Controllers\QuestionController@index')->name('questions.index');
 
 Route::get('/questions/create', 'App\Http\Controllers\QuestionController@create')->name('questions.create');
-Route::post('/questions', 'App\Http\Controllers\QuestionController@store')->name('questions.store');
 
-Route::post('/questions/{question}/answers', 'App\Http\Controllers\AnswerController@store')->name('answers.store');
+Route::post('/questions', 'App\Http\Controllers\QuestionController@store')->name('questions.store');
 
 Route::get('/questions/{question}/edit', 'App\Http\Controllers\QuestionController@edit')->name('questions.edit');
 
-Route::get('/answers/{answer}/edit', 'App\Http\Controllers\AnswerController@edit')->name('answers.edit');
-
 Route::put('/questions/{question}', 'App\Http\Controllers\QuestionController@update')->name('questions.update');
-
-Route::put('/answers/{answer}', 'App\Http\Controllers\AnswerController@update')->name('answers.update');
-
 
 Route::delete('/questions/{question}', 'App\Http\Controllers\QuestionController@destroy')->name('questions.destroy');
 
-Route::delete('/answers/{answer}', 'App\Http\Controllers\AnswerController@destroy')->name('answers.destroy');
-
-
-
 Route::post('/questions/{question}/upvote', 'App\Http\Controllers\QuestionController@upvote')->name('questions.upvote');
+
 Route::post('/questions/{question}/downvote', 'App\Http\Controllers\QuestionController@downvote')->name('questions.downvote');
 
+// answers routes
+
+Route::post('/questions/{question}/answers', 'App\Http\Controllers\AnswerController@store')->name('answers.store');
+
+Route::get('/answers/{answer}/edit', 'App\Http\Controllers\AnswerController@edit')->name('answers.edit');
+
+Route::put('/answers/{answer}', 'App\Http\Controllers\AnswerController@update')->name('answers.update');
+
+Route::delete('/answers/{answer}', 'App\Http\Controllers\AnswerController@destroy')->name('answers.destroy');
+
 Route::post('/answers/{answer}/upvote', 'App\Http\Controllers\AnswerController@upvote')->name('answers.upvote');
+
 Route::post('/answers/{answer}/downvote', 'App\Http\Controllers\AnswerController@downvote')->name('answers.downvote');
 
-
-
-
+// auth routes
 Auth::routes();
 
+// home routes
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//dashboard routes
+Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
