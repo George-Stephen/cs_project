@@ -15,7 +15,7 @@
                 data-te-carousel-item
                 data-te-carousel-active>
                     <img
-                    src="https://noblestudios.com/wp-content/uploads/webp-images-google.webp"
+                    src="https://tecdn.b-cdn.net/img/Photos/Slides/img%20(22).jpg"
                     class="h-auto max-w-full"
                     alt="Wild Landscape" />
                     <div
@@ -31,7 +31,7 @@
                 class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
                 data-te-carousel-item>
                     <img
-                        src="https://mdbcdn.b-cdn.net/img/new/slides/042.webp"
+                        src="https://tecdn.b-cdn.net/img/Photos/Slides/img%20(23).jpg"
                         class="h-auto max-w-full"
                         alt="Camera" />
                     <div
@@ -63,7 +63,7 @@
                 class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
                 data-te-carousel-item>
                     <img
-                        src="https://mdbcdn.b-cdn.net/img/new/slides/042.webp"
+                        src="https://tecdn.b-cdn.net/img/Photos/Slides/img%20(15).jpg"
                         class="h-auto max-w-full"
                         alt="Camera" />
                     <div

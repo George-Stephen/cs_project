@@ -6,6 +6,9 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\StudyGroupController;
 use App\Models\study_group;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\BlogController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -42,8 +45,6 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/study-groups', 'App\Http\Controllers\StudyGroupController@index')->name('study-groups.index');
 
     Route::get('/study-groups/{id}', 'App\Http\Controllers\StudyGroupController@show')->name('study-groups.show');
-
-    
 
     Route::get('/study-groups/{id}/edit', 'App\Http\Controllers\StudyGroupController@edit')->name('study-groups.edit');
 
@@ -115,3 +116,30 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //dashboard routes
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+
+// online market routes
+
+Route::resource('products', ProductController::class);
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
+Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
+Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+
+Route::get('/products/latest', [ProductController::class, 'latestProducts'])->name('products.latest');
+Route::get('products/{id}/request-to-buy', 'App\Http\Controllers\ProductController@requestToBuy')->name('products.requestToBuy');
+
+// blog routes
+Route::resource('blogs', BlogController::class);
+Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');
+Route::get('/blogs/create', [BlogController::class, 'create'])->name('blogs.create');
+Route::post('/blogs', [BlogController::class, 'store'])->name('blogs.store');
+Route::get('/blogs/{blog}', [BlogController::class, 'show'])->name('blogs.show');
+Route::get('/blogs/{blog}/edit', [BlogController::class, 'edit'])->name('blogs.edit');
+Route::put('/blogs/{blog}', [BlogController::class, 'update'])->name('blogs.update');
+Route::delete('/blogs/{blog}', [BlogController::class, 'destroy'])->name('blogs.destroy');
+
+
+

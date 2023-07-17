@@ -235,17 +235,6 @@
         </div>
         <br>
         <hr>
-        <div>
-            <div class="relative p-12 w-full sm:max-w-2xl sm:mx-auto">
-                <div class="overflow-hidden z-0 rounded-full relative p-3">
-                        <form role="form" class="relative flex z-50 bg-white rounded-full" action="{{ route('study-groups.index') }}" method="GET">
-                        <input type="text" placeholder="enter your search here" name="search" value="{{ $search }}" class="rounded-full flex-1 px-6 py-4 text-gray-700 focus:outline-none">
-                        <button class="bg-indigo-500 text-white rounded-full font-semibold px-8 py-4 hover:bg-indigo-400 focus:bg-indigo-600 focus:outline-none">Search</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <hr>
         <!--Footer container-->
         <footer class="bg-neutral-200 text-center text-white dark:bg-neutral-600 mt-auto">
             <div class="container pt-9">

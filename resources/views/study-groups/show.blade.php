@@ -93,7 +93,7 @@
                                     </div>
                                 </td>
                             </tr>
-                        @elseif (!$isMember && $isApproved && $isPending)
+                        @else
                             <tr>
                                 <td class="whitespace-nowrap px-6 py-4" colspan="2">
                                     <form action="{{ route('study-groups.join', $studyGroup) }}"  method="POST">

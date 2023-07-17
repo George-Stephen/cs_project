@@ -21,6 +21,9 @@
                     <x-nav-link href="{{ route('study-groups.index') }}">
                         {{ __('Study Groups') }}
                     </x-nav-link>
+                    <x-nav-link href="{{ route('products.index') }}">
+                        {{ __('Online market') }}
+                    </x-nav-link>
                 </div>
             </div>
 
