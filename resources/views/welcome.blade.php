@@ -137,14 +137,14 @@
                 data-te-carousel-item
                 data-te-carousel-active>
                     <img
-                    src="https://mdbcdn.b-cdn.net/img/new/slides/041.webp"
+                    src="https://tecdn.b-cdn.net/img/Photos/Slides/img%20(22).jpg"
                     class="h-auto max-w-full"
                     alt="Wild Landscape" />
                     <div
                         class="absolute inset-x-[15%] bottom-5 hidden py-5 text-center text-white md:block">
-                        <h5 class="text-xl">First slide label</h5>
+                        <h5 class="text-xl">Welcome to Omniverse,our School Integrated Information System!</h5>
                         <p>
-                        Some representative placeholder content for the first slide.
+                            Where you can ask questions and get answers from the school community. Collaborate with students, teachers, and administrators to find solutions and expand your knowledge.
                         </p>
                     </div>
                 </div>
@@ -153,14 +153,14 @@
                 class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
                 data-te-carousel-item>
                     <img
-                        src="https://mdbcdn.b-cdn.net/img/new/slides/042.webp"
+                        src="https://tecdn.b-cdn.net/img/Photos/Slides/img%20(23).jpg"
                         class="h-auto max-w-full"
                         alt="Camera" />
                     <div
                         class="absolute inset-x-[15%] bottom-5 hidden py-5 text-center text-white md:block">
-                        <h5 class="text-xl">Second slide label</h5>
+                        <h5 class="text-xl">Collaborate in Study Groups</h5>
                         <p>
-                        Some representative placeholder content for the first slide.
+                        ,Join study groups with fellow students to enhance your learning experience, exchange knowledge, and discuss challenging topics.
                         </p>
                     </div>
                 </div>
@@ -174,12 +174,28 @@
                     alt="Exotic Fruits" />
                     <div
                         class="absolute inset-x-[15%] bottom-5 hidden py-5 text-center text-white md:block">
-                        <h5 class="text-xl">Third slide label</h5>
+                        <h5 class="text-xl">Stay Informed with Latest Updates</h5>
                         <p>
-                        Some representative placeholder content for the first slide.
+                        ,Read insightful articles, news, and updates about the school, education, and related topics. Gain valuable insights, stay up-to-date, and engage with the school community,
                         </p>
                     </div>
                 </div>
+                <!--Fourth item-->
+                <div
+                class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
+                data-te-carousel-item>
+                    <img
+                        src="https://tecdn.b-cdn.net/img/Photos/Slides/img%20(15).jpg"
+                        class="h-auto max-w-full"
+                        alt="Camera" />
+                    <div
+                        class="absolute inset-x-[15%] bottom-5 hidden py-5 text-center text-white md:block">
+                        <h5 class="text-xl">Shop Conveniently at Our Online Market</h5>
+                        <p>
+                            and find educational resources, textbooks, stationery, and more in our online market module. Purchase or sell items within our school community.
+                        </p>
+                    </div>
+                </div> 
             </div>
 
             <!--Carousel controls - prev item-->
@@ -232,7 +248,7 @@
                 >Next</span
                 >
             </button>
-        </div>
+    </div>
         <br>
         <hr>
         <!--Footer container-->

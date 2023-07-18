@@ -28,7 +28,6 @@ class StudyGroupController extends Controller
 
         if ($search) {
             $query->where('group_name', 'LIKE', "%{$search}%")
-                ->orWhere('group_course', 'LIKE', "%{$search}%")
                 ->orWhere('description', 'LIKE', "%{$search}%");
         }
         $studyGroups = $query->paginate($perPage);

@@ -16,12 +16,12 @@ return new class extends Migration
             $table->unsignedBigInteger('seller_id');
             $table->string('title');
             $table->text('description');
-            $table->decimal('price', 8, 2);
+            $table->decimal('price', 15, 2);
             $table->string('image');
             $table->string('category');
             $table->string('condition');
             $table->string('availability');
-            $table->string('additional_information');
+            $table->text('additional_information');
             $table->timestamps();
 
             $table->foreign('seller_id')->references('id')->on('users')->onDelete('cascade');

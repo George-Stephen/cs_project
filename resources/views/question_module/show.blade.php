@@ -165,10 +165,29 @@
                 </div>
                 
                 <input type="hidden" name="question_id" value="{{ $question->id }}">
-
+                <br>
                 <button type="submit" class="w-100 h-30 inline-block rounded-full border-2 border-success px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-success transition duration-150 ease-in-out hover:border-success-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-success-600 focus:border-success-600 focus:text-success-600 focus:outline-none focus:ring-0 active:border-success-700 active:text-success-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
             data-te-ripple-init>Submit Answer</button>
             </form>  
     </div>
+                        <script>
+                            document.getElementById('delete-form').addEventListener('submit', function(e){
+                                e.preventDefault();
+                                Swal.fire({
+                                    title: 'Are you sure?',
+                                    text: 'This action cannot be undone.',
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#d33',
+                                    cancelButtonColor: '#3085d6',
+                                    confirmButtonText: 'Yes, delete it!'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        // If confirmed, submit the form
+                                        this.submit();
+                                    }
+                                });
+                            });
+                        </script>
 </div>
 @endsection

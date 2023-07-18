@@ -12,12 +12,11 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        $keyword = $request->input('keyword');
-        $products = Product::search($keyword)->paginate(10);
+        $search = $request->input('search');
+        $products = Product::search($search)->paginate(10);
 
-        $productCount = Product::count();
 
-        return view('products.index', compact('products', 'keyword','productCount'));
+        return view('products.index', compact('products', 'search'));
     }
 
     public function latestProducts()
