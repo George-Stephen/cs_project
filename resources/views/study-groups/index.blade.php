@@ -7,14 +7,6 @@
         <div class="sm:-mx-6 lg:-mx-8">
             <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
                 <div class="overflow-x-auto">
-                    <a href="{{ route('study-groups.create')}}">
-                    <button
-                        type="button"
-                        class="inline-block rounded-full border-2 border-primary px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
-                        data-te-ripple-init>
-                        Create new study group
-                    </button>
-                    </a>
                     <!-- Display search results -->
                     <div>
                         <div class="relative p-12 w-full sm:max-w-2xl sm:mx-auto">
@@ -26,6 +18,19 @@
                             </div>
                         </div>
                     </div>
+                    <hr>
+                    <div class="p-4">
+                        <a href="{{ route('study-groups.create')}}">
+                        <button
+                            type="button"
+                            class="inline-block rounded-full border-2 border-primary px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+                            data-te-ripple-init>
+                            Create new study group
+                        </button>
+                        </a>
+                    </div>
+                    <hr>
+                    <br>
                     @if ($studyGroups->isEmpty())
                         <h4 style="text-align: center;" class="mb-2 mt-0 text-4xl font-medium leading-tight text-primary">No study groups found.</h4>
                     @else

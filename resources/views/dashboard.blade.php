@@ -181,6 +181,16 @@
             </div>
             <div class="bg-gray-200 p-4">
             <h5 class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-800">Latest articles</h5>
+            @foreach ($blogs as $blog)
+                <div class="block rounded-lg bg-gray p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-300">
+                <a href="{{ route('blogs.show', $blog) }}"><h5 class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-800">{{ $blog->title }}</h5></a>
+                            <p class="mb-4 text-base text-neutral-600 dark:text-neutral-900">{{ $blog->publication_date }} </p>
+                            @foreach ($blog->tags as $tag)
+                                <span class="inline-block whitespace-nowrap rounded-[0.27rem] bg-primary-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-primary-700">{{ $tag->name }}</span>
+                            @endforeach
+                </div>
+                <br>
+            @endforeach
             </div>
         </div>
     </div>

@@ -17,8 +17,10 @@ return new class extends Migration
             $table->string('title');
             $table->text('content');
             $table->string('featured_image')->nullable();
-            $table->timestamp('publication_date')->nullable();
+            $table->date('publication_date')->nullable();
             $table->timestamps();
+
+            $table->foreign('author')->references('id')->on('users')->onDelete('cascade');
 
         });
     }

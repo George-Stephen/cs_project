@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Tag;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BlogController extends Controller
 {
@@ -12,15 +16,20 @@ class BlogController extends Controller
      */
     public function index(Request $request)
     {
-        $query = $request->input('query');
-        
-        $blogs = Blog::where('title', 'like', '%' . $query . '%')
-                    ->orWhere('content', 'like', '%' . $query . '%')
-                    ->latest()
-                    ->paginate(10)
-                    ->get();
+        $search = $request->input('search');
 
-        return view('blogs.index', compact('blogs', 'query'));
+        $query = Blog::query();
+
+        if ($search) {
+            $query->where('title', 'like', '%' . $search . '%')
+                ->orWhere('content', 'like', '%' . $search . '%');
+        }
+
+        $blogs = $query->with('author')->latest()->paginate(10);
+
+        
+
+        return view('blogs.index', compact('blogs', 'search'));
     }
 
     /**
@@ -28,7 +37,9 @@ class BlogController extends Controller
      */
     public function create()
     {
-        return view('blogs.create');
+        $tags = Tag::all();
+
+        return view('blogs.create',compact('tags'));
     }
 
     /**
@@ -39,22 +50,32 @@ class BlogController extends Controller
         $validatedData = $request->validate([
             'title' => 'required',
             'content' => 'required',
-            'featured_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust validation rules as per your requirements
+            'featured_image' => 'image|mimes:jpeg,png,jpg,gif',
+            'tags' => 'required|array',
+            'tags.*' => 'exists:tbl_tags,id', // Adjust validation rules as per your requirements
         ]);
+
+        $Author = Auth::id();
 
         $blog = new Blog();
         $blog->title = $request->input('title');
         $blog->content = $request->input('content');
+        $blog->author = $Author;
+        $blog->publication_date = Carbon::today();
+
+        
 
         if ($request->hasFile('featured_image')) {
-            $image = $request->file('featured_image');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->storeAs('public/images', $imageName);
-            $blog->featured_image = 'storage/images/' . $imageName;
+            $imagePath = $request->file('image')->store('product-images', 'public');
+            $blog->featured_image = $imagePath;
         }
 
         // Save the blog post
         $blog->save();
+
+        $tagIds = $request->input('tags');
+
+        $blog->tags()->attach($tagIds);
 
         return redirect()->route('blogs.index')->with('success', 'Blog post created successfully.');
     }
@@ -64,7 +85,8 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
-        return view('blogs.show', compact('blog'));
+        $author = User::findOrFail($blog->author);
+        return view('blogs.show', compact('blog','author'));
     }
 
     /**
@@ -72,6 +94,7 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog)
     {
+        
         return view('blogs.edit', compact('blog'));
     }
 
@@ -83,17 +106,15 @@ class BlogController extends Controller
         $validatedData = $request->validate([
             'title' => 'required',
             'content' => 'required',
-            'featured_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust validation rules as per your requirements
+            'featured_image' => 'image|mimes:jpeg,png,jpg,gif', // Adjust validation rules as per your requirements
         ]);
 
         $blog->title = $request->input('title');
         $blog->content = $request->input('content');
 
         if ($request->hasFile('featured_image')) {
-            $image = $request->file('featured_image');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->storeAs('public/images', $imageName);
-            $blog->featured_image = 'storage/images/' . $imageName;
+            $imagePath = $request->file('featured_image')->store('product-images', 'public');
+            $blog->featured_image = $imagePath;
         }
 
         // Update the blog post
