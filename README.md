@@ -13,8 +13,8 @@ Our project is our suggested solution to solving a problem faced by students due
  `composer new laravel:livewire omniverse_info_system`
 - After a successful installation, type `run npm dev && run npm build` to build the scaffolding.
 - Install Git Bash and after successful installation open Bash in the directory of the project.
-- In Bash, type 
-`git clone https://github.com/George-Stephen/omniverse_info_system.git` to import the project from the online repository to your local machine
+- In Bash, type `git clone https://github.com/George-Stephen/omniverse_info_system.git`
+- to import the project from the online repository to your local machine
 
   *These steps work on **all** platforms*
   
