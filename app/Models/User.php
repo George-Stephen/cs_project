@@ -24,8 +24,9 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'full_name',
         'email',
+        'phone',
         'password',
     ];
 
@@ -58,4 +59,9 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function studyGroups()
+    {
+        return $this->belongsToMany(StudyGroup::class, 'study_group_user', 'user_id', 'study_group_id');
+    }
 }
